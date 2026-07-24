@@ -1,0 +1,26 @@
+---
+title: "Notes on Filing a Responsible Disclosure with CERT-In"
+slug: "responsible-disclosure-notes"
+date: "2025-11-22"
+excerpt: "What passive OSINT and attack-surface mapping actually involve when the goal is a formal disclosure report, not a bug bounty payout."
+topic: "Red Team"
+readingTime: "5 min"
+---
+
+Independent security research without a bug bounty program attached still needs the same discipline as a paid engagement — arguably more, since there's no scope document handed to you. Reporting exposed, publicly accessible services on a live FMCG environment to CERT-In was a useful lesson in what "responsible" actually requires in practice.
+
+## Passive first, always
+
+Everything started with passive OSINT — no active probing until the exposure was already visible through public information: DNS records, certificate transparency logs, exposed service banners. Passive reconnaissance keeps the process defensible and keeps you well clear of anything resembling unauthorized access.
+
+## Mapping exposure, not exploiting it
+
+Attack surface mapping and service enumeration identified five publicly accessible internet-facing services and administrative interfaces. The goal at every step was identifying and documenting exposure — never exploiting it. A responsible disclosure report demonstrates that a risk exists and is significant; it doesn't need to prove that further by actually causing harm.
+
+## What the report actually contained
+
+The report followed a structure any organization's security team could act on immediately: what was found, how it was found (in enough detail to be credible, not enough to be a how-to), the risk it represented, and concrete remediation recommendations. That structure — findings, risk, remediation — is what separates a disclosure report from a threat.
+
+## Takeaway
+
+Responsible disclosure is a discipline, not a loophole. Stay passive as long as possible, document exposure rather than exploiting it, and write the report for the person who has to fix the problem, not for an audience.

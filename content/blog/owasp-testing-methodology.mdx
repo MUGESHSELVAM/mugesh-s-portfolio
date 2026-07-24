@@ -1,0 +1,26 @@
+---
+title: "A Structured Approach to OWASP Top 10 Testing"
+slug: "owasp-testing-methodology"
+date: "2026-01-08"
+excerpt: "How mapping black-box findings to the OWASP Testing Guide v4 turns a pile of scan output into a report someone can act on."
+topic: "OWASP"
+readingTime: "7 min"
+---
+
+Running Nmap, Burp Suite, and SQLmap against a target produces a lot of raw output. None of it matters until it's organized into something a client can prioritize against. The structure that made that possible, across authorized black-box engagements, was mapping every finding back to the OWASP Testing Guide v4 from the very first recon step.
+
+## Start with the attack surface, not the exploit
+
+Before touching a single vulnerability class, the first pass was always service enumeration — `nmap -sV -O --script vuln` — to build an attack-surface profile: which services are exposed, what versions, what's likely misconfigured. Every subsequent test traced back to one of those exposed services. That discipline prevents the common failure mode of testing opportunistically and losing track of what's actually in scope.
+
+## Validating, not just scanning
+
+A scanner flagging "possible SQL injection" is a hypothesis, not a finding. Validating UNION-based and blind SQL injection with SQLmap, and reflected XSS with Burp Suite, meant confirming exploitability — not just alerting on a signature match. The distinction matters enormously in a report: a validated authentication-bypass chain gets a very different remediation priority than an unconfirmed scanner flag.
+
+## Documentation is the deliverable
+
+The technical testing is maybe half the work. The other half is documenting the full attack chain — recon, exploitation, impact — in a way that supports a CVSS score and a remediation roadmap a non-technical stakeholder can prioritize against. A finding without a scored, chained writeup doesn't change anything; it just sits in a PDF.
+
+## Takeaway
+
+Treat the OWASP Testing Guide as the skeleton of the engagement, not a checklist to run afterward. Recon defines scope, validation confirms real risk, and CVSS-scored documentation is what actually gets a vulnerability fixed.

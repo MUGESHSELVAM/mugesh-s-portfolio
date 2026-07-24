@@ -1,0 +1,28 @@
+---
+title: "What Log Correlation Actually Looks Like in a SOC"
+slug: "siem-correlation-triage"
+date: "2026-02-14"
+excerpt: "Notes from correlating firewall, IDS, and endpoint telemetry in Splunk — and why the hard part is prioritization, not collection."
+topic: "SOC"
+readingTime: "6 min"
+---
+
+Most explanations of SIEM correlation focus on the mechanics: ingest logs, write a query, get an alert. The part that's harder to teach — and the part that actually determines whether a SOC is effective — is deciding which of the hundred alerts on your screen deserve the next ten minutes of your attention.
+
+## Three sources, one story
+
+During log correlation work across firewall, IDS, and endpoint telemetry, the useful signal almost never lived in a single source. A firewall log shows a connection. An IDS alert shows a signature match. An endpoint log shows a process spawning. None of those three, alone, tells you anything you'd escalate. Together, in the right order, they tell you a story.
+
+That's the actual job of correlation: not finding anomalies, but stitching independently unremarkable events into a sequence that is remarkable.
+
+## Where MITRE ATT&CK earns its keep
+
+Mapping observed behavior to MITRE ATT&CK TTPs isn't paperwork — it's a prioritization filter. An alert that maps cleanly to a known technique in a known tactic (say, credential access followed by lateral movement) gets triaged very differently than an isolated anomaly with no chain behind it. TTP mapping turns "something happened" into "something happened that fits a pattern attackers use."
+
+## The triage bottleneck is attention, not tooling
+
+The workflow that actually accelerated triage wasn't a new tool — it was structuring investigation around a documented IR procedure so that every alert got the same disciplined pass: source validation, context gathering, TTP mapping, escalation decision. Removing the "what do I check first" decision from every single alert freed up attention for the alerts that actually needed judgment.
+
+## Takeaway
+
+If you're starting out in SOC work, resist the urge to chase every alert individually. Build the habit of asking what story three sources are telling together, and lean on a framework like MITRE ATT&CK to decide, fast, whether that story is worth escalating.

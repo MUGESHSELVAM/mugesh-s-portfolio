@@ -1,0 +1,129 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+    --color-base: 8 9 11;
+    --color-base-soft: 12 13 16;
+    --color-surface: 18 19 23;
+    --color-surface-raised: 23 24 29;
+    --color-surface-hover: 28 30 36;
+    --color-border: 33 35 41;
+    --color-border-soft: 26 27 32;
+    --color-ink: 242 243 245;
+    --color-ink-muted: 154 157 166;
+    --color-ink-faint: 107 110 118;
+    --color-signal: 91 141 239;
+    --color-signal-dim: 58 92 174;
+    --color-signal-glow: 127 166 245;
+    --color-amber: 245 166 35;
+    --color-risk-critical: 239 83 80;
+    --color-risk-high: 245 166 35;
+    --color-risk-medium: 232 197 71;
+    --color-risk-low: 52 199 123;
+    --color-risk-info: 91 141 239;
+    --color-grid: 255 255 255;
+    --color-shadow-highlight: 255 255 255;
+    --color-shadow: 0 0 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-base text-ink antialiased;
+    font-feature-settings: "ss01" on, "cv01" on;
+  }
+
+  ::selection {
+    background: rgb(var(--color-signal) / 0.35);
+    color: rgb(var(--color-ink));
+  }
+
+  :focus-visible {
+    outline: 2px solid rgb(var(--color-signal));
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: rgb(var(--color-base));
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgb(var(--color-border));
+    border-radius: 8px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(var(--color-ink-faint));
+  }
+}
+
+@layer utilities {
+  .grid-backdrop {
+    background-image: radial-gradient(
+      circle at 1px 1px,
+      rgb(var(--color-grid) / 0.045) 1px,
+      transparent 0
+    );
+    background-size: 28px 28px;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .mono-label {
+    @apply font-mono text-[11px] uppercase tracking-[0.18em] text-ink-muted;
+  }
+}
+
+.theme-transition,
+.theme-transition body,
+.theme-transition body * {
+  transition-property: background-color, border-color, color, fill, stroke, box-shadow;
+  transition-duration: 300ms;
+  transition-timing-function: ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.theme-light {
+  color-scheme: light;
+  --color-base: 248 250 252;
+  --color-base-soft: 241 245 249;
+  --color-surface: 255 255 255;
+  --color-surface-raised: 248 250 252;
+  --color-surface-hover: 241 245 249;
+  --color-border: 203 213 225;
+  --color-border-soft: 226 232 240;
+  --color-ink: 15 23 42;
+  --color-ink-muted: 71 85 105;
+  --color-ink-faint: 100 116 139;
+  --color-signal: 37 99 235;
+  --color-signal-dim: 30 64 175;
+  --color-signal-glow: 59 130 246;
+  --color-amber: 180 83 9;
+  --color-risk-critical: 185 28 28;
+  --color-risk-high: 180 83 9;
+  --color-risk-medium: 161 98 7;
+  --color-risk-low: 4 120 87;
+  --color-risk-info: 37 99 235;
+  --color-grid: 15 23 42;
+  --color-shadow-highlight: 255 255 255;
+  --color-shadow: 15 23 42;
+}
